@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--如果这里引入了parent标签(即下面的)，在dependcyment中就不需要单独引用springboot依赖-->
+    <!--
+    <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.0.6.RELEASE</version>
+      <relativePath/>
+    </parent>
+          -->
+    <groupId>com.atguigu.springcloud</groupId>
+    <artifactId>mscloud</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging><!--表示总的父工程-->
+
+    <modules>
+        <module>asimple-consumer-order80</module>
+        <module>asimple-provider-payment8001</module>
+        <module>cloud-provider-payment8001</module>
+        <module>cloud-consumer-order80</module>
+        <module>cloud-eureka-server7001</module>
+        <module>cloud-provider-zookeeper-payment8004</module>
+        <module>cloud-consumercousul-order80</module>
+        <module>cloud-provider-hystrix-payment8001</module>
+        <module>cloud-consumer-hystrix-order80</module>
+        <module>cloud-consumer-hystrix-dashboard9001</module>
+        <module>cloud-gataway-gataway9527</module>
+    </modules>
+
+    <!--统一管理jar包版本-->
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compilr.source>1.8</maven.compilr.source>
+        <maven.compilr.target>1.8</maven.compilr.target>
+    </properties>
+    <!--引入springcloud的版本-->
+    <dependencyManagement>
+        <dependencies>
+            <!--原先在这里没有引入springboot依赖，会报错-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.2.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+    <!--为springboot添加maven插件-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

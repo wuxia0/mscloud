@@ -1,0 +1,11 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: asimple-provider-service
+  security:
+    user:
+      name: eureka
+      password: eureka1234
+
+---

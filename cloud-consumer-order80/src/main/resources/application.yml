@@ -1,0 +1,32 @@
+server:
+  port: 80
+spring:
+  application:
+    name: order80
+      #配置默认的用户名和密码
+      #  security:
+      #   basic:
+      #    enabled: false
+      #  user:
+    #   name: eureka
+    #   password: eureka1234
+info:
+  app:
+    name: project.artifactId
+
+#从配置文件获取值得两种方式
+#1.@value
+#2,@ConfigurationProperties
+provider:
+  providerServiceUrl: http://localhost:8001/
+  #服务提供者开启了用户认证，所以这里访问服务提供者不需要加上用户密码？？？
+  #providerServiceUrl: http://eureka:eureka1234@localhost:8001/
+  #服务客户端
+eureka:
+  client:
+    register-with-eureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    prefer-ip-address: true

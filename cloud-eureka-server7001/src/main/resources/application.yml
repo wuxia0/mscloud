@@ -1,0 +1,38 @@
+#spring:
+#  security:
+#    user:
+#      name: eureka
+#      password: eureka1234
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: peer1
+eureka:
+  client:
+    #是否将自己注册到eureka server 上
+    register-with-eureka: false
+    #是否从eureka server上拉取服务列表，单节点不需要同步其他eureka server的服务列表
+    fetch-registry: false
+    service-url:
+      #设置与eureka server交互的地址，客户端与服务端交互就是依靠这个
+      #集群指向其他eureka
+      #defaultZone: http://localhost1:7002/eureka/
+      #单机就是自己
+      defaultZone: http://localhost:7001/eureka/
+---
+spring:
+  profiles: peer1
+server:
+  port: 7001
+eureka:
+  instance:
+    hostname: eureka7001
+---
+spring:
+  profiles: peer2
+server:
+  port: 7002
+eureka:
+  instance:
+    hostname: eureka7002

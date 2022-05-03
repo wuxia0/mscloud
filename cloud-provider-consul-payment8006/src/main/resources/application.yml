@@ -1,0 +1,12 @@
+server:
+  port: 8006
+spring:
+  application:
+    name: cloud-provider-service
+    #consul \u6CE8\u518C\u4E2D\u5FC3\u5730\u5740
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}

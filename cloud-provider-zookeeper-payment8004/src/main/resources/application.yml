@@ -1,0 +1,10 @@
+server:
+  port: 8004
+spring:
+  application:
+    name: cloud-provider-service
+  cloud:
+    zookeeper:
+      discovery:
+        enabled: true
+      connect-string: 180.76.51.32:2181
