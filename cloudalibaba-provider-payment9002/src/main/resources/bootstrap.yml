@@ -1,0 +1,21 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        #换成nginx的地址
+        server-addr: 192.168.100.180:1111 #配置nacos地址
+      config:
+        server-addr: 192.168.100.180:1111 #nacos作为配置中心地址
+        file-extension: yaml
+        #group: TEST_GROUP
+        group: dev
+        namespace: 9afb5132-e68b-4694-88fe-f0b872989687
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

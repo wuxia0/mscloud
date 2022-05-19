@@ -1,4 +1,4 @@
-package com.atguigu.springcloud;
+package com.atguigu.springcloud.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -54,12 +54,7 @@ public class HelloController {
         return services;
     }
 
-    @GetMapping("/payment/get/{id}")//get 请求
-    public String jumping1() {
-        return "jumping1 from " + serverPort + " service";
-    }
-
-    @GetMapping("/payment/lb")//get 请求
+    @GetMapping("/jumping2/lb")//get 请求
     public String jumping2() {
         return "jumping2 from " + serverPort + " service->payment/lb";
     }

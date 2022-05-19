@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class GatewayConfig {
-//    @Bean
-//    public RouteLocator customerLocator(RouteLocatorBuilder routeLocatorBuilder){
-//        return routeLocatorBuilder.routes()
-//                .route("path_route_atguigu",r -> r.path("/guonei").uri("http://news.baidu.com/guonei"))
-//                .build();
-//    }
+    @Bean
+    public RouteLocator customerLocator(RouteLocatorBuilder routeLocatorBuilder){
+        return routeLocatorBuilder.routes()
+                .route("path_route_atguigu",r -> r.path("/guonei").uri("http://news.baidu.com/guonei"))
+                .build();
+    }
 }

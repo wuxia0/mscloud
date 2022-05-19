@@ -17,7 +17,7 @@ public class ApplicationContextConfig {
     }
 
     @Bean("restTemplateRibbon")
-    @LoadBalanced//表示开启负载均衡，默认是轮询
+    //@LoadBalanced//表示开启负载均衡，默认是轮询
     public RestTemplate getRestTemplateRibbon() {
         return new RestTemplate();
     }

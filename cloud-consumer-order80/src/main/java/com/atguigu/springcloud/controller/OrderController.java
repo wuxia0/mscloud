@@ -1,11 +1,17 @@
 package com.atguigu.springcloud.controller;
 
+import com.atguigu.springcloud.lb.WxLoadBalance;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.List;
 
 /**
  * @Auther: wuxia
@@ -21,6 +27,12 @@ public class OrderController {
     //从配置文件获取服务提供者的url信息，而不用在这里写死
     @Value("${provider.providerServiceUrl}")
     private String providerServiceUrl;
+
+    @Resource
+    private WxLoadBalance wxLoadBalance;
+
+    @Resource
+    private DiscoveryClient discoveryClient;
 
     //测试此微服务能不能调通服务提供者
     @GetMapping("/orderjumping")
@@ -43,5 +55,15 @@ public class OrderController {
         String url = "http://CLOUD-PROVIDER-SERVICE" + "/ribbonS";
         System.out.println("===" + url);
         return restTemplateRibbon.getForObject(url, String.class);
+    }
+    @GetMapping( "/consumer/payment/lb")
+    public String getPaymentLB() {
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PROVIDER-SERVICE");
+        if (instances == null || instances.size() <= 0) {
+            return null;
+        }
+        ServiceInstance serviceInstance = wxLoadBalance.instances(instances);
+        URI uri = serviceInstance.getUri();
+        return restTemplate.getForObject(uri + "/payment/lb", String.class);
     }
 }
